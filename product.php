@@ -33,7 +33,7 @@ if (!$product) {
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
             <!-- Product Image -->
             <div>
-                <img src="<?php echo $product['image']; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" 
+                <img src="<?php echo getProductImageUrl($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" 
                      style="width: 100%; max-width: 500px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
             </div>
             
@@ -84,7 +84,7 @@ if (!$product) {
                 
                 foreach ($related_products as $related): ?>
                 <div class="product-card">
-                    <img src="<?php echo $related['image']; ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
+                    <img src="<?php echo getProductImageUrl($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
                     <h3><?php echo htmlspecialchars($related['name']); ?></h3>
                     <p class="price">$<?php echo number_format($related['price'], 2); ?></p>
                     <a href="product.php?id=<?php echo $related['id']; ?>" class="btn btn-secondary">View Details</a>

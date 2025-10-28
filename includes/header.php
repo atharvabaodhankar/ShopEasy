@@ -11,6 +11,7 @@
             <ul class="nav-menu">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="products.php">Products</a></li>
+                <li><a href="my_orders.php">My Orders</a></li>
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>

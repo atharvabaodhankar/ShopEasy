@@ -101,7 +101,7 @@ if ($_POST && $product) {
             <?php endif; ?>
             
             <?php if ($product): ?>
-            <form method="POST" style="max-width: 600px;">
+            <form method="POST" enctype="multipart/form-data" style="max-width: 600px;">
                 <div class="form-group">
                     <label for="name">Product Name *</label>
                     <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
@@ -123,8 +123,18 @@ if ($_POST && $product) {
                 </div>
                 
                 <div class="form-group">
-                    <label for="image">Image URL</label>
-                    <input type="text" id="image" name="image" class="form-control" value="<?php echo htmlspecialchars($product['image']); ?>">
+                    <label>Current Image</label>
+                    <div style="margin-bottom: 1rem;">
+                        <?php 
+                        $image_src = ($product['image'] === 'placeholder.jpg') 
+                            ? '../assets/images/placeholder.jpg' 
+                            : '../uploads/' . $product['image'];
+                        ?>
+                        <img src="<?php echo $image_src; ?>" alt="Current product image" style="max-width: 200px; max-height: 150px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <label for="image">Upload New Image (optional)</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                    <small style="color: #666; font-size: 0.9em;">Supported formats: JPG, PNG, GIF, WebP. Maximum size: 5MB. Leave empty to keep current image.</small>
                 </div>
                 
                 <div class="form-group">

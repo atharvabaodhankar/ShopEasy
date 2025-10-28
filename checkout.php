@@ -45,6 +45,8 @@ if ($_POST) {
             unset($_SESSION['cart']);
             
             $success = "Order placed successfully! Order ID: #$order_id";
+            $success_order_id = $order_id;
+            $success_customer_email = $customer_email;
         } catch (Exception $e) {
             $conn->rollBack();
             $error = 'Error placing order: ' . $e->getMessage();
@@ -74,7 +76,15 @@ if ($_POST) {
                 <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                 <h2><?php echo $success; ?></h2>
                 <p>Thank you for your order! We'll process it shortly.</p>
-                <a href="products.php" class="btn" style="background: white; color: #27ae60; margin-top: 1rem;">Continue Shopping</a>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="order_details.php?id=<?php echo $success_order_id; ?>&email=<?php echo urlencode($success_customer_email); ?>" 
+                       class="btn" style="background: white; color: #27ae60;">
+                        <i class="fas fa-eye"></i> View Order Details
+                    </a>
+                    <a href="products.php" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+                        Continue Shopping
+                    </a>
+                </div>
             </div>
         <?php else: ?>
             <?php if ($error): ?>

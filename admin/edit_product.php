@@ -38,9 +38,23 @@ if ($_POST && $product) {
     $price = $_POST['price'] ?? 0;
     $stock_quantity = $_POST['stock_quantity'] ?? 0;
     $featured = isset($_POST['featured']) ? 1 : 0;
-    $image = $_POST['image'] ?? 'assets/images/placeholder.jpg';
+    $image = $product['image']; // Keep current image by default
     
-    if ($name && $description && $price > 0) {
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $upload_result = uploadProductImage($_FILES['image']);
+        if ($upload_result['success']) {
+            // Delete old image if it's not the placeholder
+            if ($product['image'] !== 'placeholder.jpg') {
+                deleteProductImage($product['image']);
+            }
+            $image = $upload_result['filename'];
+        } else {
+            $error = $upload_result['message'];
+        }
+    }
+    
+    if ($name && $description && $price > 0 && !$error) {
         try {
             $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, featured = ?, image = ?, updated_at = NOW() WHERE id = ?");
             $stmt->execute([$name, $description, $price, $stock_quantity, $featured, $image, $id]);
@@ -53,7 +67,7 @@ if ($_POST && $product) {
         } catch (Exception $e) {
             $error = 'Error updating product: ' . $e->getMessage();
         }
-    } else {
+    } else if (!$error) {
         $error = 'Please fill in all required fields.';
     }
 }

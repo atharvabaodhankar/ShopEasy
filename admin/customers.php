@@ -64,7 +64,7 @@ try {
                             <td><?php echo htmlspecialchars($customer['customer_email']); ?></td>
                             <td><?php echo htmlspecialchars($customer['customer_phone'] ?? 'N/A'); ?></td>
                             <td><?php echo $customer['total_orders']; ?></td>
-                            <td>$<?php echo number_format($customer['total_spent'], 2); ?></td>
+                            <td>₹<?php echo number_format($customer['total_spent'], 2); ?></td>
                             <td><?php echo date('M j, Y', strtotime($customer['last_order'])); ?></td>
                         </tr>
                         <?php endforeach; ?>

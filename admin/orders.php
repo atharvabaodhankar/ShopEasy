@@ -62,7 +62,7 @@ try {
                             <td>#<?php echo $order['id']; ?></td>
                             <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
                             <td><?php echo htmlspecialchars($order['customer_email']); ?></td>
-                            <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                            <td>₹<?php echo number_format($order['total_amount'], 2); ?></td>
                             <td>
                                 <form method="POST" style="display: inline;">
                                     <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">

@@ -123,7 +123,7 @@ function updateCartQuantity(productId, quantity) {
             // Update total if on cart page
             const cartTotal = document.querySelector('.cart-total');
             if (cartTotal) {
-                cartTotal.textContent = '$' + data.cart_total;
+                cartTotal.textContent = '₹' + data.cart_total;
             }
         }
     })
@@ -162,7 +162,7 @@ function displaySearchResults(products) {
                 <img src="${product.image}" alt="${product.name}">
                 <div>
                     <h4>${product.name}</h4>
-                    <p>$${parseFloat(product.price).toFixed(2)}</p>
+                    <p>₹${parseFloat(product.price).toFixed(2)}</p>
                 </div>
             </div>
         `;

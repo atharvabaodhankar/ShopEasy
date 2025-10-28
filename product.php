@@ -40,7 +40,7 @@ if (!$product) {
             <!-- Product Details -->
             <div>
                 <h1><?php echo htmlspecialchars($product['name']); ?></h1>
-                <p class="price" style="font-size: 2rem; margin: 1rem 0;">$<?php echo number_format($product['price'], 2); ?></p>
+                <p class="price" style="font-size: 2rem; margin: 1rem 0;">₹<?php echo number_format($product['price'], 2); ?></p>
                 
                 <div style="margin: 2rem 0;">
                     <h3>Description</h3>
@@ -86,7 +86,7 @@ if (!$product) {
                 <div class="product-card">
                     <img src="<?php echo getProductImageUrl($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
                     <h3><?php echo htmlspecialchars($related['name']); ?></h3>
-                    <p class="price">$<?php echo number_format($related['price'], 2); ?></p>
+                    <p class="price">₹<?php echo number_format($related['price'], 2); ?></p>
                     <a href="product.php?id=<?php echo $related['id']; ?>" class="btn btn-secondary">View Details</a>
                 </div>
                 <?php endforeach; ?>

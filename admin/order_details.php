@@ -106,18 +106,18 @@ if ($_POST && isset($_POST['update_status'])) {
                                     <div style="flex: 1;">
                                         <h4><?php echo htmlspecialchars($item['product_name'] ?: 'Product #' . $item['product_id']); ?></h4>
                                         <p style="color: #666; margin: 0;">
-                                            Quantity: <?php echo $item['quantity']; ?> × $<?php echo number_format($item['price'], 2); ?>
+                                            Quantity: <?php echo $item['quantity']; ?> × ₹<?php echo number_format($item['price'], 2); ?>
                                         </p>
                                     </div>
                                     
                                     <div style="text-align: right;">
-                                        <strong>$<?php echo number_format($item['quantity'] * $item['price'], 2); ?></strong>
+                                        <strong>₹<?php echo number_format($item['quantity'] * $item['price'], 2); ?></strong>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
                                 
                                 <div style="padding: 1rem; background: #f8f9fa; text-align: right;">
-                                    <h3>Total: $<?php echo number_format($order['total_amount'], 2); ?></h3>
+                                    <h3>Total: ₹<?php echo number_format($order['total_amount'], 2); ?></h3>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -153,7 +153,7 @@ if ($_POST && isset($_POST['update_status'])) {
                             
                             <div style="margin-bottom: 1rem;">
                                 <strong>Total Amount:</strong><br>
-                                $<?php echo number_format($order['total_amount'], 2); ?>
+                                ₹<?php echo number_format($order['total_amount'], 2); ?>
                             </div>
                         </div>
                         

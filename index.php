@@ -36,7 +36,7 @@ $featured_products = getFeaturedProducts($conn);
                 <div class="product-card">
                     <img src="<?php echo getProductImageUrl($product['image']); ?>" alt="<?php echo $product['name']; ?>">
                     <h3><?php echo $product['name']; ?></h3>
-                    <p class="price">$<?php echo number_format($product['price'], 2); ?></p>
+                    <p class="price">₹<?php echo number_format($product['price'], 2); ?></p>
                     <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-secondary">View Details</a>
                 </div>
                 <?php endforeach; ?>

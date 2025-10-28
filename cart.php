@@ -35,7 +35,7 @@ $cart_total = getCartTotal($conn);
                     <img src="<?php echo getProductImageUrl($item['image']); ?>" alt="<?php echo $item['name']; ?>">
                     <div class="cart-item-info">
                         <h3><?php echo $item['name']; ?></h3>
-                        <p>Price: $<?php echo number_format($item['price'], 2); ?></p>
+                        <p>Price: ₹<?php echo number_format($item['price'], 2); ?></p>
                     </div>
                     <div class="cart-item-actions">
                         <input type="number" class="quantity-input form-control" 
@@ -43,7 +43,7 @@ $cart_total = getCartTotal($conn);
                                min="1" 
                                data-product-id="<?php echo $item['id']; ?>"
                                data-price="<?php echo $item['price']; ?>">
-                        <p class="item-total"><strong>$<?php echo number_format($item['total_price'], 2); ?></strong></p>
+                        <p class="item-total"><strong>₹<?php echo number_format($item['total_price'], 2); ?></strong></p>
                         <a href="remove_from_cart.php?id=<?php echo $item['id']; ?>" class="btn" style="background: #e74c3c; color: white;">Remove</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ $cart_total = getCartTotal($conn);
             </div>
             
             <div style="text-align: right; margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
-                <h2 id="cart-total">Total: $<?php echo number_format($cart_total, 2); ?></h2>
+                <h2 id="cart-total">Total: ₹<?php echo number_format($cart_total, 2); ?></h2>
                 <div style="margin-top: 1rem;">
                     <a href="products.php" class="btn btn-secondary">Continue Shopping</a>
                     <a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>
@@ -105,11 +105,11 @@ $cart_total = getCartTotal($conn);
                     // Update item total
                     const cartItem = input.closest('.cart-item');
                     const itemTotal = cartItem.querySelector('.item-total strong');
-                    itemTotal.textContent = '$' + data.item_total;
+                    itemTotal.textContent = '₹' + data.item_total;
                     
                     // Update cart total
                     const cartTotal = document.getElementById('cart-total');
-                    cartTotal.textContent = 'Total: $' + data.cart_total;
+                    cartTotal.textContent = 'Total: ₹' + data.cart_total;
                 } else {
                     alert('Error updating cart: ' + data.message);
                     // Reload page on error

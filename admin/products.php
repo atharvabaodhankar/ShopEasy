@@ -87,7 +87,7 @@ try {
                                      style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                             </td>
                             <td><?php echo htmlspecialchars($product['name']); ?></td>
-                            <td>$<?php echo number_format($product['price'], 2); ?></td>
+                            <td>₹<?php echo number_format($product['price'], 2); ?></td>
                             <td><?php echo $product['stock_quantity']; ?></td>
                             <td>
                                 <?php if ($product['featured']): ?>

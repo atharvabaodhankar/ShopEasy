@@ -92,17 +92,17 @@ if ($_POST) {
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #eee;">
                             <div>
                                 <strong><?php echo htmlspecialchars($item['name']); ?></strong><br>
-                                <small>Qty: <?php echo $item['cart_quantity']; ?> × $<?php echo number_format($item['price'], 2); ?></small>
+                                <small>Qty: <?php echo $item['cart_quantity']; ?> × ₹<?php echo number_format($item['price'], 2); ?></small>
                             </div>
                             <div>
-                                <strong>$<?php echo number_format($item['total_price'], 2); ?></strong>
+                                <strong>₹<?php echo number_format($item['total_price'], 2); ?></strong>
                             </div>
                         </div>
                         <?php endforeach; ?>
                         
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; font-size: 1.2rem; font-weight: bold;">
                             <div>Total:</div>
-                            <div>$<?php echo number_format($cart_total, 2); ?></div>
+                            <div>₹<?php echo number_format($cart_total, 2); ?></div>
                         </div>
                     </div>
                 </div>

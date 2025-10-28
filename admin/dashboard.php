@@ -49,8 +49,8 @@ try {
                 </div>
                 
                 <div class="stat-card">
-                    <i class="fas fa-dollar-sign" style="font-size: 2rem; color: #27ae60; margin-bottom: 1rem;"></i>
-                    <div class="stat-number">$<?php echo number_format($total_revenue, 2); ?></div>
+                    <i class="fas fa-rupee-sign" style="font-size: 2rem; color: #27ae60; margin-bottom: 1rem;"></i>
+                    <div class="stat-number">₹<?php echo number_format($total_revenue, 2); ?></div>
                     <div>Total Revenue</div>
                 </div>
                 
@@ -82,7 +82,7 @@ try {
                             <tr>
                                 <td>#<?php echo $order['id']; ?></td>
                                 <td><?php echo $order['customer_name']; ?></td>
-                                <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                                <td>₹<?php echo number_format($order['total_amount'], 2); ?></td>
                                 <td><?php echo ucfirst($order['status']); ?></td>
                                 <td><?php echo date('M j, Y', strtotime($order['created_at'])); ?></td>
                             </tr>

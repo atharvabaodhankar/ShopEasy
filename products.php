@@ -26,7 +26,7 @@ $products = getAllProducts($conn);
                 <img src="<?php echo getProductImageUrl($product['image']); ?>" alt="<?php echo $product['name']; ?>">
                 <h3><?php echo $product['name']; ?></h3>
                 <p><?php echo substr($product['description'], 0, 100) . '...'; ?></p>
-                <p class="price">$<?php echo number_format($product['price'], 2); ?></p>
+                <p class="price">₹<?php echo number_format($product['price'], 2); ?></p>
                 <div style="display: flex; gap: 1rem; justify-content: center;">
                     <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-secondary">View Details</a>
                     <a href="add_to_cart.php?id=<?php echo $product['id']; ?>" class="btn btn-primary">Add to Cart</a>

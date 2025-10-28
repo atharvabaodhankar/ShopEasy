@@ -32,7 +32,7 @@ $cart_total = getCartTotal($conn);
             <div class="cart-items">
                 <?php foreach ($cart_items as $item): ?>
                 <div class="cart-item">
-                    <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>">
+                    <img src="<?php echo getProductImageUrl($item['image']); ?>" alt="<?php echo $item['name']; ?>">
                     <div class="cart-item-info">
                         <h3><?php echo $item['name']; ?></h3>
                         <p>Price: $<?php echo number_format($item['price'], 2); ?></p>

@@ -14,9 +14,19 @@ if ($_POST) {
     $price = $_POST['price'] ?? 0;
     $stock_quantity = $_POST['stock_quantity'] ?? 0;
     $featured = isset($_POST['featured']) ? 1 : 0;
-    $image = $_POST['image'] ?? 'assets/images/placeholder.jpg';
+    $image = 'placeholder.jpg'; // Default image
     
-    if ($name && $description && $price > 0) {
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $upload_result = uploadProductImage($_FILES['image']);
+        if ($upload_result['success']) {
+            $image = $upload_result['filename'];
+        } else {
+            $error = $upload_result['message'];
+        }
+    }
+    
+    if ($name && $description && $price > 0 && !$error) {
         try {
             $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, featured, image, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
             $stmt->execute([$name, $description, $price, $stock_quantity, $featured, $image]);
@@ -24,7 +34,7 @@ if ($_POST) {
         } catch (Exception $e) {
             $error = 'Error adding product: ' . $e->getMessage();
         }
-    } else {
+    } else if (!$error) {
         $error = 'Please fill in all required fields.';
     }
 }
@@ -58,7 +68,7 @@ if ($_POST) {
                 </div>
             <?php endif; ?>
             
-            <form method="POST" style="max-width: 600px;">
+            <form method="POST" enctype="multipart/form-data" style="max-width: 600px;">
                 <div class="form-group">
                     <label for="name">Product Name *</label>
                     <input type="text" id="name" name="name" class="form-control" required>
@@ -80,8 +90,9 @@ if ($_POST) {
                 </div>
                 
                 <div class="form-group">
-                    <label for="image">Image URL</label>
-                    <input type="text" id="image" name="image" class="form-control" placeholder="assets/images/product.jpg">
+                    <label for="image">Product Image</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                    <small style="color: #666; font-size: 0.9em;">Supported formats: JPG, PNG, GIF, WebP. Maximum size: 5MB</small>
                 </div>
                 
                 <div class="form-group">

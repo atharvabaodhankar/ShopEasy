@@ -68,4 +68,68 @@ function redirectIfNotAdmin() {
         exit();
     }
 }
+
+function uploadProductImage($file) {
+    $upload_dir = '../uploads/';
+    $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    $max_size = 5 * 1024 * 1024; // 5MB
+    
+    // Check if file was uploaded
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'message' => 'No file uploaded or upload error occurred.'];
+    }
+    
+    // Check file size
+    if ($file['size'] > $max_size) {
+        return ['success' => false, 'message' => 'File size too large. Maximum 5MB allowed.'];
+    }
+    
+    // Check file type
+    if (!in_array($file['type'], $allowed_types)) {
+        return ['success' => false, 'message' => 'Invalid file type. Only JPG, PNG, GIF, and WebP are allowed.'];
+    }
+    
+    // Generate unique filename
+    $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $new_filename = 'product_' . uniqid() . '_' . time() . '.' . $file_extension;
+    $upload_path = $upload_dir . $new_filename;
+    
+    // Create upload directory if it doesn't exist
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+    
+    // Move uploaded file
+    if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+        return ['success' => true, 'filename' => $new_filename];
+    } else {
+        return ['success' => false, 'message' => 'Failed to move uploaded file.'];
+    }
+}
+
+function deleteProductImage($filename) {
+    if (empty($filename) || $filename === 'placeholder.jpg') {
+        return true; // Don't delete placeholder or empty filenames
+    }
+    
+    $file_path = '../uploads/' . $filename;
+    if (file_exists($file_path)) {
+        return unlink($file_path);
+    }
+    return true; // File doesn't exist, consider it deleted
+}
+
+function getProductImageUrl($filename) {
+    if (empty($filename) || $filename === 'placeholder.jpg') {
+        return 'assets/images/placeholder.jpg';
+    }
+    
+    // Check if it's an old URL-based image (for backward compatibility)
+    if (strpos($filename, 'http') === 0 || strpos($filename, 'assets/') === 0) {
+        return $filename;
+    }
+    
+    // Return path to uploaded image
+    return 'uploads/' . $filename;
+}
 ?>

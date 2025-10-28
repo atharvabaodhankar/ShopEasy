@@ -8,8 +8,21 @@ redirectIfNotAdmin();
 // Handle product deletion
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+    
+    // Get product image before deletion to remove file
+    $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
     $stmt->execute([$id]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($product) {
+        // Delete the product image file
+        deleteProductImage($product['image']);
+        
+        // Delete the product from database
+        $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+        $stmt->execute([$id]);
+    }
+    
     header('Location: products.php');
     exit();
 }
@@ -65,7 +78,12 @@ try {
                         <?php foreach ($products as $product): ?>
                         <tr>
                             <td>
-                                <img src="../<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" 
+                                <?php 
+                                $image_src = ($product['image'] === 'placeholder.jpg') 
+                                    ? '../assets/images/placeholder.jpg' 
+                                    : '../uploads/' . $product['image'];
+                                ?>
+                                <img src="<?php echo $image_src; ?>" alt="<?php echo $product['name']; ?>" 
                                      style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                             </td>
                             <td><?php echo htmlspecialchars($product['name']); ?></td>

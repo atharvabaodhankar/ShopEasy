@@ -48,14 +48,14 @@ CREATE TABLE admin_users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample products
-    INSERT INTO products (name, description, price, stock_quantity, image, featured) VALUES
-    ('Wireless Headphones', 'High-quality wireless headphones with noise cancellation and long battery life.', 99.99, 50, 'https://via.placeholder.com/300x200/3498db/ffffff?text=Headphones', TRUE),
-    ('Smartphone', 'Latest model smartphone with advanced camera and fast processor.', 699.99, 25, 'https://via.placeholder.com/300x200/e74c3c/ffffff?text=Smartphone', TRUE),
-    ('Laptop', 'Powerful laptop perfect for work and gaming with high-resolution display.', 1299.99, 15, 'https://via.placeholder.com/300x200/2ecc71/ffffff?text=Laptop', TRUE),
-    ('Smart Watch', 'Feature-rich smartwatch with health monitoring and GPS tracking.', 249.99, 30, 'https://via.placeholder.com/300x200/f39c12/ffffff?text=Smart+Watch', FALSE),
-    ('Bluetooth Speaker', 'Portable Bluetooth speaker with excellent sound quality and waterproof design.', 79.99, 40, 'https://via.placeholder.com/300x200/9b59b6/ffffff?text=Speaker', FALSE),
-    ('Gaming Mouse', 'Precision gaming mouse with customizable buttons and RGB lighting.', 59.99, 60, 'https://via.placeholder.com/300x200/34495e/ffffff?text=Gaming+Mouse', FALSE);
+-- Insert sample products (using placeholder images for now)
+INSERT INTO products (name, description, price, stock_quantity, image, featured) VALUES
+('Wireless Headphones', 'High-quality wireless headphones with noise cancellation and long battery life.', 99.99, 50, 'placeholder.jpg', TRUE),
+('Smartphone', 'Latest model smartphone with advanced camera and fast processor.', 699.99, 25, 'placeholder.jpg', TRUE),
+('Laptop', 'Powerful laptop perfect for work and gaming with high-resolution display.', 1299.99, 15, 'placeholder.jpg', TRUE),
+('Smart Watch', 'Feature-rich smartwatch with health monitoring and GPS tracking.', 249.99, 30, 'placeholder.jpg', FALSE),
+('Bluetooth Speaker', 'Portable Bluetooth speaker with excellent sound quality and waterproof design.', 79.99, 40, 'placeholder.jpg', FALSE),
+('Gaming Mouse', 'Precision gaming mouse with customizable buttons and RGB lighting.', 59.99, 60, 'placeholder.jpg', FALSE);
 
 -- Insert sample admin user (password: admin123)
 INSERT INTO admin_users (username, password, email) VALUES
